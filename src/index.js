@@ -1,4 +1,6 @@
-addEventListener("fetch"， (event) => {
+import DOCS from './help.html'
+
+addEventListener("fetch", (event) => {
   event.passThroughOnException();
   event.respondWith(handleRequest(event.request));
 });
@@ -14,7 +16,6 @@ const routes = {
   "k8s.599997.xyz": "https://registry.k8s.io",
   "ghcr.599997.xyz": "https://ghcr.io",
   "cloudsmith.599997.xyz": "https://docker.cloudsmith.io",
-  "ecr.599997.xyz": "https://public.ecr.aws",
 
   // staging
   "docker-staging.599997.xyz": dockerHub,
@@ -42,6 +43,15 @@ async function handleRequest(request) {
         status: 404,
       }
     );
+  }
+  // return docs
+  if (url.pathname === "/") {
+    return new Response(DOCS, {
+      status: 200,
+      headers: {
+        "content-type": "text/html"
+      }
+    });
   }
   const isDockerHub = upstream == dockerHub;
   const authorization = request.headers.get("Authorization");
