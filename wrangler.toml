@@ -20,7 +20,7 @@ name = "cloudflare-docker-proxy"
    { pattern = "k8s.599997.xyz", custom_domain = true },
    { pattern = "ghcr.599997.xyz", custom_domain = true },
    { pattern = "cloudsmith.599997.xyz", custom_domain = true },
- ]
+]
 
 [env.production.vars]
 MODE = "production"
